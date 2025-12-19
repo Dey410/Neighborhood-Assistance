@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeighborHelp</title>
+
+    <!-- 高德 JS API 安全配置 -->
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+        securityJsCode: "b3de9cc6fc1fa9077dab032b8e7f6f4e",
+      };
+    </script>
+
+    <!-- 高德地图 JS SDK -->
+    <script
+      type="text/javascript"
+      src="https://webapi.amap.com/maps?v=2.0&key=2a5e9e3daad1053b670d646ee876761e"
+    ></script>
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  </head>
+
+  <body>
+    <!-- Vue 挂载点 -->
+    <div id="app"></div>
+
+    <!-- Vue 入口脚本（⚠️ 这一行是之前缺失的致命点） -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

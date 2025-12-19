@@ -1,51 +1,63 @@
 @echo off
-REM é‚»é‡Œå¸® åç«¯é¡¹ç›®å¯åŠ¨è„šæœ¬
+REM ==================================================
+REM ÁÚÀï°ï NeighborHelp ºó¶Ë·şÎñÆô¶¯½Å±¾ (Windows)
+REM ==================================================
 
 echo.
 echo ===============================================
-echo é‚»é‡Œå¸® åç«¯æœåŠ¡å¯åŠ¨è„šæœ¬
+echo   ÁÚÀï°ï ºó¶Ë·şÎñÆô¶¯½Å±¾
 echo ===============================================
 echo.
 
-REM æ£€æŸ¥ Python æ˜¯å¦å®‰è£…
-python --version >nul 2>&1
-if errorlevel 1 (
-    echo âŒ é”™è¯¯: æœªæ£€æµ‹åˆ° Pythonï¼Œè¯·å…ˆå®‰è£… Python
+REM ½øÈë½Å±¾ËùÔÚÄ¿Â¼£¨backend Ä¿Â¼£©
+cd /d "%~dp0"
+
+echo µ±Ç°Â·¾¶£º
+cd
+echo.
+
+REM È·ÈÏ¹Ø¼üÎÄ¼ş´æÔÚ
+if not exist app\main.py (
+    echo ´íÎó£ºÎ´ÕÒµ½ app\main.py
+    echo ÇëÈ·ÈÏ start.bat Î»ÓÚ backend\ Ä¿Â¼ÏÂ¡£
     pause
     exit /b 1
 )
 
-echo âœ… Python å·²å®‰è£…
-
-REM æ£€æŸ¥ä¾èµ–æ˜¯å¦å®‰è£…
+echo ³É¹¦¶¨Î»µ½ backend Ä¿Â¼¡£
 echo.
-echo æ­£åœ¨æ£€æŸ¥ä¾èµ–...
-pip list | findstr /i fastapi >nul 2>&1
+
+REM ¼ì²é Python
+python --version >nul 2>&1
 if errorlevel 1 (
-    echo âš ï¸ æ­£åœ¨å®‰è£…ä¾èµ–...
-    pip install -r requirements.txt
-    if errorlevel 1 (
-        echo âŒ å®‰è£…ä¾èµ–å¤±è´¥
-        pause
-        exit /b 1
-    )
+    echo ´íÎó£ºÎ´¼ì²âµ½ Python£¬ÇëÏÈ°²×° Python 3.9+
+    pause
+    exit /b 1
 )
 
-echo âœ… ä¾èµ–æ£€æŸ¥å®Œæ¯•
-
-REM åˆå§‹åŒ–æ•°æ®åº“
+echo Python ÒÑ¼ì²âµ½¡£
 echo.
-echo æ­£åœ¨åˆå§‹åŒ–æ•°æ®åº“...
+
+REM °²×° / ¸üĞÂÒÀÀµ£¨pip »á×Ô¶¯Ìø¹ıÒÑ°²×°µÄ£©
+if exist requirements.txt (
+    echo ÕıÔÚ¼ì²é²¢°²×°ÒÀÀµ...
+    pip install -r requirements.txt
+) else (
+    echo ¾¯¸æ£ºÎ´ÕÒµ½ requirements.txt
+)
+
+echo.
+echo ÕıÔÚ³õÊ¼»¯Êı¾İ¿â£¨create_all ÎªÃİµÈ²Ù×÷£©...
 python init_db.py
 
-REM å¯åŠ¨æœåŠ¡
 echo.
 echo ===============================================
-echo å¯åŠ¨ FastAPI æœåŠ¡...
-echo API æ–‡æ¡£åœ°å€: http://localhost:8000/docs
+echo   Æô¶¯ FastAPI ·şÎñ£¨¿ª·¢Ä£Ê½£©
+echo   API ÎÄµµµØÖ·: http://127.0.0.1:8000/docs
 echo ===============================================
 echo.
 
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+REM Æô¶¯·şÎñ£¨--reload ½öÓÃÓÚ¿ª·¢»·¾³£©
+python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 pause

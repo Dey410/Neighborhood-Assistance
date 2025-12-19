@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import order, provider, amap
 
 app = FastAPI(
-    title="邻里帮 后端服务",
+    title="邻里帮后端服务",
     description="基于位置的邻里服务平台",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 # CORS 配置
@@ -27,7 +27,7 @@ def root():
     return {
         "message": "NeighborHelp Backend Running",
         "version": "1.0.0",
-        "docs": "/docs"
+        "docs": "/docs",
     }
 
 @app.get("/health")
@@ -36,4 +36,5 @@ def health_check():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
